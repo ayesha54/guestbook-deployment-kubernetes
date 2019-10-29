@@ -154,12 +154,13 @@ Scaling up or down is easy because your servers are defined as a Service that us
 
 Run the following command to scale up the number of frontend Pods:
 
-  kubectl scale deployment frontend --replicas=5
+  `kubectl scale deployment frontend --replicas=5`
 Query the list of Pods to verify the number of frontend Pods running:
 
-  kubectl get pods
+  `kubectl get pods`
+  
 The response should look similar to this:
-
+```
   NAME                            READY     STATUS    RESTARTS   AGE
   frontend-3823415956-70qj5       1/1       Running   0          5s
   frontend-3823415956-dsvc5       1/1       Running   0          54m
@@ -169,41 +170,45 @@ The response should look similar to this:
   redis-master-1068406935-3lswp   1/1       Running   0          56m
   redis-slave-2005841000-fpvqc    1/1       Running   0          55m
   redis-slave-2005841000-phfv9    1/1       Running   0          55m
+ ```
 Run the following command to scale down the number of frontend Pods:
 
-  kubectl scale deployment frontend --replicas=2
+  `kubectl scale deployment frontend --replicas=2`
 Query the list of Pods to verify the number of frontend Pods running:
 
-  kubectl get pods
+  `kubectl get pods`
 The response should look similar to this:
-
+```
   NAME                            READY     STATUS    RESTARTS   AGE
   frontend-3823415956-k22zn       1/1       Running   0          1h
   frontend-3823415956-w9gbt       1/1       Running   0          1h
   redis-master-1068406935-3lswp   1/1       Running   0          1h
   redis-slave-2005841000-fpvqc    1/1       Running   0          1h
   redis-slave-2005841000-phfv9    1/1       Running   0          1h
+```
 Cleaning up
 Deleting the Deployments and Services also deletes any running Pods. Use labels to delete multiple resources with one command.
 
 Run the following commands to delete all Pods, Deployments, and Services.
-
+```
   kubectl delete deployment -l app=redis
   kubectl delete service -l app=redis
   kubectl delete deployment -l app=guestbook
   kubectl delete service -l app=guestbook
+```
 The responses should be:
-
+```
   deployment.apps "redis-master" deleted
   deployment.apps "redis-slave" deleted
   service "redis-master" deleted
   service "redis-slave" deleted
   deployment.apps "frontend" deleted    
   service "frontend" deleted
+```
 Query the list of Pods to verify that no Pods are running:
 
-  kubectl get pods
+  `kubectl get pods`
 The response should be this:
 
-  No resources found.
+  `No resources found.`
 
