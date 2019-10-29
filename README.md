@@ -28,7 +28,7 @@ subl .
 Now, create the deployments and services.
 
 Launch a terminal window in the directory you downloaded the manifest files.
-Apply the Redis Master Deployment from the redis-master-deployment.yaml file:
+Create the Redis Master Deployment from the redis-master-deployment.yaml file:
 
   `kubectl create -f redis-master-deployment.yaml`
 Query the list of Pods to verify that the Redis Master Pod is running:
@@ -48,9 +48,9 @@ Note: Replace POD-NAME with the name of your Pod.
 
 The guestbook applications needs to communicate to the Redis master to write its data. 
 
-Apply the Redis Master Service from the following redis-master-service.yaml file:
+Create the Redis Master Service from the following redis-master-service.yaml file:
 
- ` kubectl apply -f https://k8s.io/examples/application/guestbook/redis-master-service.yaml`
+ ` kubectl create -f redis-master-service.yaml`
 Query the list of Services to verify that the Redis Master Service is running:
 
   `kubectl get service`
@@ -70,9 +70,9 @@ Deployments scale based off of the configurations set in the manifest file. In t
 
 If there are not any replicas running, this Deployment would start the two replicas on your container cluster. Conversely, if there are more than two replicas are running, it would scale down until two replicas are running.
 
-Apply the Redis Slave Deployment from the redis-slave-deployment.yaml file:
+Create the Redis Slave Deployment from the redis-slave-deployment.yaml file:
 
-  `kubectl apply -f https://k8s.io/examples/application/guestbook/redis-slave-deployment.yaml`
+  `kubectl create -f redis-slave-deployment.yaml`
 Query the list of Pods to verify that the Redis Slave Pods are running:
 
   kubectl get pods
@@ -90,7 +90,7 @@ The guestbook application needs to communicate to Redis slaves to read data. To 
 
 Create the Redis Slave Service from the following redis-slave-service.yaml file:
 
-  kubectl apply -f https://k8s.io/examples/application/guestbook/redis-slave-service.yaml
+  kubectl create -f redis-slave-service.yaml
 Query the list of Services to verify that the Redis slave service is running:
 
   `kubectl get services`
@@ -106,9 +106,11 @@ Set up and Expose the Guestbook Frontend
 create the frontend Deployment from the frontend-deployment.yaml file:
 
   `kubectl create -f frontend-deployment.yaml`
+  
 Query the list of Pods to verify that the three frontend replicas are running:
 
   `kubectl get pods -l app=guestbook -l tier=frontend`
+  
 The response should be similar to this:
 ```
   NAME                        READY     STATUS    RESTARTS   AGE
@@ -123,7 +125,7 @@ The redis-slave and redis-master Services you applied are only accessible within
 If you want guests to be able to access your guestbook, you must configure the frontend Service to be externally visible, so a client can request the Service from outside the container cluster. Minikube can only expose Services through NodePort.
 Create the frontend Service from the frontend-service.yaml file:
 
-  `kubectl apply -f https://k8s.io/examples/application/guestbook/frontend-service.yaml`
+  `kubectl create -f frontend-service.yaml`
 Query the list of Services to verify that the frontend Service is running:
 
   `kubectl get services`
