@@ -90,10 +90,12 @@ The guestbook application needs to communicate to Redis slaves to read data. To 
 
 Create the Redis Slave Service from the following redis-slave-service.yaml file:
 
-  kubectl create -f redis-slave-service.yaml
+  `kubectl create -f redis-slave-service.yaml`
+  
 Query the list of Services to verify that the Redis slave service is running:
 
   `kubectl get services`
+  
 The response should be similar to this:
 ```
   NAME           TYPE        CLUSTER-IP   EXTERNAL-IP   PORT(S)    AGE
@@ -126,9 +128,11 @@ If you want guests to be able to access your guestbook, you must configure the f
 Create the frontend Service from the frontend-service.yaml file:
 
   `kubectl create -f frontend-service.yaml`
+  
 Query the list of Services to verify that the frontend Service is running:
 
   `kubectl get services`
+  
 The response should be similar to this:
 ```
 
